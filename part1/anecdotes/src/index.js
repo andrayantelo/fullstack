@@ -29,11 +29,18 @@ const App = (props) => {
       setPoints(copy);
   }
 
+  const getMax = (arr) => {
+      return arr.indexOf(Math.max(...arr))
+  }
+
   return (
     <div>
+      <h1>Anecdote of the Day</h1>
       {props.anecdotes[selected]}
       <Button name={"vote"} handleClick={vote} />
       <Button name={"get anecdote"} handleClick={handleClick} />
+      <h1>Anecdote with most votes</h1>
+      {props.anecdotes[getMax(points)]}
     </div>
   )
 }
