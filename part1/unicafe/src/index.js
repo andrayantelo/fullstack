@@ -14,9 +14,10 @@ const Button = ({name, handleClick}) => {
 
 const Display = ({ name, data }) => {
     return (
-        <div>
-            {name} {data}
-        </div>
+        <tr>
+            <td>{name}</td>
+            <td>{data}</td> 
+        </tr>
     )
 }
 
@@ -37,13 +38,17 @@ const Statistics = (props) => {
     }
     return (
         <div>
-            <h1>Statistics</h1>
-            <Statistic name="good" data={props.good} />
-            <Statistic name="neutral" data={props.neutral} />
-            <Statistic name="bad" data={props.bad} />
-            <Statistic name="all" data={props.total} />
-            <Statistic name="average" data={props.avg} />
-            <Statistic name="positive" data={props.positive} />
+            <h1> Statistics </h1>
+            <table>
+                <tbody>
+                    <Statistic name="good" data={props.good} />
+                    <Statistic name="neutral" data={props.neutral} />
+                    <Statistic name="bad" data={props.bad} />
+                    <Statistic name="all" data={props.total} />
+                    <Statistic name="average" data={props.avg} />
+                    <Statistic name="positive" data={props.positive} />
+                </tbody>
+            </table>
         </div>
     )
 }
@@ -54,8 +59,6 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  const state = [good, neutral, bad];
-  
   const handleClick = (changeState) => () => {
       changeState(prevState => prevState + 1);
   }
