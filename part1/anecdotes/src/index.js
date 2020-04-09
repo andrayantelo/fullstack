@@ -4,13 +4,15 @@ import ReactDOM from 'react-dom'
 const Button = (props) => {
   return (
     <div>
-      <button onClick={props.handleClick}>Click Me</button>
+      <button onClick={props.handleClick}>{props.name}</button>
     </div>
   )
 }
 
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(0);
+  const initialPoints = new Array(5+1).join('0').split('').map(parseFloat);
+  const [points, setPoints] = useState(initialPoints);
 
   const getRandomInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max));
@@ -21,10 +23,17 @@ const App = (props) => {
       setSelected(index);
   }
 
+  const vote = () => {
+      const copy = [...points];
+      copy[selected] += 1;
+      setPoints(copy);
+  }
+
   return (
     <div>
       {props.anecdotes[selected]}
-      <Button handleClick={handleClick} />
+      <Button name={"vote"} handleClick={vote} />
+      <Button name={"get anecdote"} handleClick={handleClick} />
     </div>
   )
 }
