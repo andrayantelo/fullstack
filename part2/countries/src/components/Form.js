@@ -1,10 +1,15 @@
 import React from 'react';
 
-const Form = () => {
+const Form = (props) => {
     return (
-        <div>
-            Form
-        </div>
+        <form>
+            <div>
+                <input
+                    value={props.query}
+                    onChange={props.handleQueryChange}
+                />
+            </div>
+        </form>
     )
 }
 
