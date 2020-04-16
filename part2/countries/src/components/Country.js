@@ -1,7 +1,12 @@
 import React from 'react';
 import Languages from './Languages';
+import Weather from './Weather';
 
-const Country = ({ country }) => {
+const Country = (props) => {
+    if (!Object.keys(props.country).length || !Object.keys(props.weather).length) {
+        return null;
+    }
+    const {country, weather} = props;
     return (
         <div key={country.name}>
             <h1>{country.name}</h1>
@@ -13,9 +18,10 @@ const Country = ({ country }) => {
             <img
                 src={country.flag}
                 alt="country flag"
-                height="50%"
-                width="50%"
+                height="25%"
+                width="25%"
             />
+            <Weather country={country} weather={weather} />
         </div>
     )
 }

@@ -2,10 +2,17 @@ import React from 'react';
 import Country from './Country';
 import CountryList from './CountryList';
 
-const Display = ({ countries, handleShowClick, selectedCountry, loaded }) => {
+const Display = (props) => {
+    const {
+        countries,
+        handleShowClick,
+        selectedCountry,
+        loaded,
+        weather
+    } = props;
 
-    if (selectedCountry) {
-        return <Country country={selectedCountry} />
+    if (Object.keys(selectedCountry).length) {
+        return <Country country={selectedCountry} weather={weather} />
     }
     else if (countries.length > 10 || !loaded) {
         return <div>Too many matches, specify another filter.</div>
@@ -15,7 +22,7 @@ const Display = ({ countries, handleShowClick, selectedCountry, loaded }) => {
     }
     else {
         return (
-            <Country country={countries[0]} />
+            <Country country={countries[0]} weather={weather} />
         )
     }
 }
