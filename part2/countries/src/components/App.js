@@ -35,10 +35,10 @@ const App = () => {
         // request the weather api
         if (Object.keys(selectedCountry).length) {
             const api_key = process.env.REACT_APP_API_KEY;
-            const url = 'http://api.openweathermap.org/data/2.5/weather';
+            const baseUrl = 'http://api.openweathermap.org/data/2.5/weather';
             
             axios
-                .get(url, {
+                .get(baseUrl, {
                     params: {
                         q: selectedCountry.capital,
                         appid: api_key,
