@@ -7,6 +7,11 @@ const getAll = () => {
     return request.then(response => response.data);
 }
 
+const getPerson = (id) => {
+    const request = axios.get(`${baseUrl}/${id}`);
+    return request.then(response => response.data);
+}
+
 const create = (newObj) => {
     const request = axios.post(baseUrl, newObj);
     return request.then(response => response.data);
@@ -24,6 +29,7 @@ const deletePerson = (id) => {
 
 export default {
     getAll,
+    getPerson,
     create,
     update,
     deletePerson

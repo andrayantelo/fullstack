@@ -11,25 +11,32 @@ const App = () => {
   const [ newName, setNewName ] = useState('');
   const [ newNumber, setNewNumber ] = useState('');
   const [ newFilter, setNewFilter ] = useState('');
-  const [ errorMessage, setErrorMessage ] = useState(null);
+  const [ message, setMessage ] = useState(null);
+  const [ messageClass, setMessageClass ] = useState('error');
 
 
-    const emitError = (message) => {
-        setErrorMessage(message);
-        setTimeout(() => setErrorMessage(null), 5000);
+    const notify = (message, msgClass) => {
+        setMessage(message);
+        setMessageClass(msgClass);
+        setTimeout(() => setMessage(null), 5000);
     }
 
     useEffect(() => {
         personsService.getAll()
         .then(personsData => setPersons(personsData))
         .catch(error => {
-            emitError(`Could not get persons data. Error: ${error}`)
+            notify(`Could not get persons data. ${error}`, 'error')
         });
     }, [])
 
     const existing = (name) => {
-        // returns true if person with name 'name' already in personss
-        return persons.filter(person => person.name === name).length;
+        // returns true if person with name 'name' already in persons
+        const person = persons.filter(person => person.name === name);
+        return (person.length === 1);
+    }
+
+    const getPerson = (name) => {
+        return persons.filter(person => person.name === name)[0];
     }
 
     const clearForm = () => {
@@ -46,16 +53,17 @@ const App = () => {
             .then(updatedPerson => {
                 setPersons(persons.filter(p => p.id !== person.id).concat(updatedPerson));
                 clearForm();
+                notify(`Successfully updated ${person.name}'s phone number`, 'success');
             })
             .catch(error => {
-                emitError(`Could not update ${person.name}'s data. Error: ${error}`);
+                notify(`Could not update ${person.name}'s data. ${error}`, 'error');
             });
     }
 
     const addPerson = (event) => {
         event.preventDefault();
         if (existing(newName)) {
-            updateNumber(existing(newName)[0])
+            updateNumber(getPerson(newName))
         }
         else {
             const personObj = {
@@ -66,9 +74,10 @@ const App = () => {
                 .then(newPerson => {
                 setPersons(persons.concat(newPerson));
                 clearForm();
+                notify(`Added ${newName}`, 'success')
             })
             .catch(error => {
-                emitError(`${newName} is already in phonebook. Error: ${error}`);
+                notify(`${newName} is already in phonebook. ${error}`, 'error');
             })
         }
     }
@@ -80,7 +89,7 @@ const App = () => {
                     setPersons(persons.filter(person => person.id !== response.id));
                 })
                 .catch(error => {
-                    emitError(`Could not delete ${person.name}. Error: ${error}`);
+                    notify(`Could not delete ${person.name}. ${error}`, 'error');
                 });  
         }
     }
@@ -113,7 +122,7 @@ const App = () => {
     } 
     return (
     <div>
-        <Notification message={errorMessage} />
+        <Notification message={message} messageClass={messageClass} />
         <h2>Phonebook</h2>
             <Filter handleChange={handleFilterChange} newFilter={newFilter} />
         <h2>Add a new</h2>
