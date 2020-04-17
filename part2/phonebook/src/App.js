@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import Filter from './Filter';
-import PersonForm from './PersonForm';
-import Persons from './Persons';
-import personsService from '../services/persons';
+import Filter from './components/Filter';
+import PersonForm from './components/PersonForm';
+import Persons from './components/Persons';
+import personsService from './services/persons';
 
 
 const App = () => {
@@ -13,7 +13,8 @@ const App = () => {
 
   useEffect(() => {
       personsService.getAll()
-      .then(personsData => setPersons(personsData));
+      .then(personsData => setPersons(personsData))
+      .catch(error => console.log("could not get persons data", error));
   }, [])
 
     const existing = (name) => {
