@@ -19,16 +19,10 @@
       "important": true
     },
     {
-      "content": "hello",
-      "date": "2020-04-27T22:39:44.838Z",
+      "content": "hi",
+      "date": "2020-04-30T21:53:23.079Z",
       "important": false,
       "id": 4
-    },
-    {
-      "content": "Hi",
-      "date": "2020-04-27T22:41:01.868Z",
-      "important": true,
-      "id": 5
     }
   ]
 }
