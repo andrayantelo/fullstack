@@ -1,0 +1,7 @@
+POST http://100.115.92.204:3001/api/notes
+Content-Type: application/json
+
+{
+    "content": "Hello world",
+    "important": false
+}
