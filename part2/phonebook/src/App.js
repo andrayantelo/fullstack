@@ -125,7 +125,7 @@ const App = () => {
         <Notification message={message} messageClass={messageClass} />
         <h2>Phonebook</h2>
             <Filter handleChange={handleFilterChange} newFilter={newFilter} />
-        <h2>Add a new</h2>
+        <h2>Add a new person</h2>
             <PersonForm
                 addPerson={addPerson}
                 newName={newName}
