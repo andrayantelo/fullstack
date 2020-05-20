@@ -77,7 +77,8 @@ const App = () => {
                 notify(`Added ${newName}`, 'success')
             })
             .catch(error => {
-                notify(`${newName} is already in phonebook. ${error}`, 'error');
+                //notify(`${newName} is already in phonebook. ${error}`, 'error');
+                notify(error.response.data.error, 'error')
             })
         }
     }
