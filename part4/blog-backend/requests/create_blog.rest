@@ -1,0 +1,9 @@
+POST http://100.115.92.204:3003/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Piet's Eating Blog",
+    "author": "Piet",
+    "url": "pootpie.com",
+    "likes": 500
+}
