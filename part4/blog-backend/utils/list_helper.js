@@ -9,13 +9,22 @@ const totalLikes = (blogs) => {
 
 const favoriteBlog = (blogs) => {
     const maxLikes = Math.max.apply(Math, blogs.map(blog => blog.likes))
-    const mostLikedBlog = blogs.reduce((curr) => curr.likes === maxLikes)
+
+    let mostLikedBlog = blogs.filter((curr) => {
+        console.log(curr.likes)
+        return curr.likes === maxLikes
+    })[0]
     // delete _id, url, and _v
-    _.omit(mostLikedBlog, '_id', 'url', '_v')
+    mostLikedBlog = _.omit(mostLikedBlog, '_id', 'url', '__v')
     return mostLikedBlog
+}
+
+const mostBlogs = (blogs) => {
+
 }
 
 module.exports = {
     totalLikes,
-    favoriteBlog
+    favoriteBlog,
+    mostBlogs
 }
