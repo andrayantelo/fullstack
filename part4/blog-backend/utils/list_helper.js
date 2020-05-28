@@ -11,7 +11,6 @@ const favoriteBlog = (blogs) => {
     const maxLikes = Math.max.apply(Math, blogs.map(blog => blog.likes))
 
     let mostLikedBlog = blogs.filter((curr) => {
-        console.log(curr.likes)
         return curr.likes === maxLikes
     })[0]
     // delete _id, url, and _v
@@ -20,7 +19,18 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
-
+    // make a list of the author names
+    const authors = _.uniq(blogs.map(blog => blog.author))
+    // get the number of blogs per author
+    const results = _.map(authors, author => {
+        var length = _.reject(blogs, blog => {
+            return (blog.author.indexOf(author) < 0)
+        }).length
+        return { author, blogs: length }
+    })
+    // find author with highest number of blogs
+    const highest = _.maxBy(results, result => result.blogs)
+    return highest
 }
 
 module.exports = {

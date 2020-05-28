@@ -30,3 +30,15 @@ describe('favorite blog', () => {
         )
     })
 })
+
+describe('most blogs', () => {
+    test('Regular list of blogs', () => {
+        const result = listHelper.mostBlogs(input.blogs)
+        expect(result).toEqual(
+            {
+                author: 'Robert C. Martin',
+                blogs: 3
+            }
+        )
+    })
+})
