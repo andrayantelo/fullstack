@@ -41,4 +41,17 @@ describe('most blogs', () => {
             }
         )
     })
+    test('List with one blog', () => {
+        const result = listHelper.mostBlogs(input.oneBlog)
+        expect(result).toEqual(
+            {
+                author: 'Sally Billy',
+                blogs: 1
+            }
+        )
+    })
+    test('Empty blog list', () => {
+        const result = listHelper.mostBlogs([])
+        expect(result).toEqual({})
+    })
 })

@@ -19,6 +19,9 @@ const favoriteBlog = (blogs) => {
 }
 
 const mostBlogs = (blogs) => {
+    if (_.isEmpty(blogs)) {
+        return {}
+    }
     // make a list of the author names
     const authors = _.uniq(blogs.map(blog => blog.author))
     // get the number of blogs per author
