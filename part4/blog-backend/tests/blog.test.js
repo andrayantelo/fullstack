@@ -55,3 +55,28 @@ describe('most blogs', () => {
         expect(result).toEqual({})
     })
 })
+
+describe('most likes', () => {
+    test('Regular list of blogs', () => {
+        const result = listHelper.mostLikes(input.blogs)
+        expect(result).toEqual(
+            {
+                author: 'Edsger W. Dijkstra',
+                likes: 12
+            }
+        )
+    })
+    test('List with one blog', () => {
+        const result = listHelper.mostLikes(input.oneBlog)
+        expect(result).toEqual(
+            {
+                author: 'Sally Billy',
+                likes: 1
+            }
+        )
+    })
+    test('Empty blog list', () => {
+        const result = listHelper.mostLikes({})
+        expect(result).toEqual({})
+    })
+})

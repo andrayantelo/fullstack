@@ -36,8 +36,17 @@ const mostBlogs = (blogs) => {
     return highest
 }
 
+const mostLikes = (blogs) => {
+    if (_.isEmpty(blogs)) {
+        return {}
+    }
+    const likes = _.maxBy(blogs, blog => blog.likes)
+    return _.omit(likes, '_id', 'url', '__v', 'title')
+}
+
 module.exports = {
     totalLikes,
     favoriteBlog,
-    mostBlogs
+    mostBlogs,
+    mostLikes
 }
