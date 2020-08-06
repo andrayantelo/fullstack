@@ -15,3 +15,13 @@ beforeEach(async () => {
     }
 })
 
+test('blogs are returned as JSON', async () => {
+    await api
+        .get('/api/blogs')
+        .expect(200)
+        .expect('Content-Type', /application\/json/)
+})
+
+afterAll(() => {
+    mongoose.connection.close()
+})
